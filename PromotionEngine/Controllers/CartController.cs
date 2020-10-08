@@ -25,6 +25,7 @@ namespace PromotionEngine.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Product>>> Get()
         {
+            //Get Available Products
             List<Product> response = await _promotionChecker.GetProducts();
             if (null == response)
                throw new RestException(HttpStatusCode.NotFound, new
@@ -38,6 +39,7 @@ namespace PromotionEngine.Controllers
         [HttpPost]
         public async Task<ActionResult<DiscountDto>> CheckOut([FromBody] Order order)
         {
+            //Check if OrderId and ProductIds null
             if (order != null || order.Products.Any())
             {
                 if (!order.OrderID.HasValue)
@@ -48,7 +50,9 @@ namespace PromotionEngine.Controllers
                         throw new Exception("Product Id should be supplied");
                 }
             }
+            //Get the Original Price,rebate and discounted price
             DiscountDto response = await this._promotionChecker.GetTotalPrice(order);
+            //Rest exception can be useful for the front end client to intercept our custome messages
             if(null == response)
                 throw new RestException(HttpStatusCode.NotFound, new 
                                                                     {

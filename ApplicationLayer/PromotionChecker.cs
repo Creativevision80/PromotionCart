@@ -11,6 +11,7 @@ namespace Application
     {
         public async Task<List<Product>> GetProducts()
         {
+            //Get all products
             List<Product> products = await DataContext.GetProducts();
             return products;
         }
@@ -18,12 +19,14 @@ namespace Application
         public async Task<DiscountDto> GetTotalPrice(Order ord)
         {
             List<Product> productList = await DataContext.GetProducts();
+            //Map the requested product with the existing price of the products
             List<Product> products = ord.Products.Join(productList,(d => d.Id),(s => s.Id),((d, s) =>
             {
                 d.Price = s.Price;
                 return d;
             })).ToList<Product>();
             List<Promotion> promotions = await DataContext.GetAvailablePromotions();
+            //Get Original price,rebate and discounted price
             List<Decimal> PriceAfterDiscount = promotions.Select(promo => GetTotalPrice(products, promo)).ToList<decimal>();
             Decimal originalPrice = products.Sum<Product>(x => x.Price);
             Decimal totalPriceAfterDiscount = PriceAfterDiscount.Sum();

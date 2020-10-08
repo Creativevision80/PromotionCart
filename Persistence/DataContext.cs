@@ -12,6 +12,7 @@ namespace Persistence
     {
         public static async Task<List<Product>> GetProducts()
         {
+            //Get the products from the json file
             string filePath = Directory.GetParent(DataContext.ToApplicationPath()).FullName + "\\Persistence\\Products.json";
             List<Product> products = await Task.FromResult<List<Product>>(JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(filePath)));
             List<Product> productList = products;
@@ -20,12 +21,14 @@ namespace Persistence
 
         public static async Task<List<Promotion>> GetAvailablePromotions()
         {
+            //Get available promotions from json file
             string filePath = Directory.GetParent(DataContext.ToApplicationPath()).FullName + "\\Persistence\\PromotionPrice.json";
             List<Promotion> promotion = await Task.FromResult<List<Promotion>>(JsonConvert.DeserializeObject<List<Promotion>>(File.ReadAllText(filePath)));
             List<Promotion> promotionList = promotion;
             return promotionList;
         }
 
+        // Get the base directory
         public static string ToApplicationPath() => new Regex("(?<!fil)[A-Za-z]:\\\\+[\\S\\s]*?(?=\\\\+bin)")
             .Match(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).Value;
     }
