@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "37bae662-db3c-425a-b765-105a290115e0",
+		"name": "CartPromo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MAersk",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:64834/api/cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "64834",
+					"path": [
+						"api",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checkout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"OrderID\": 1,\r\n   \"Products\": [\r\n      {\r\n         \"id\":\"A\"\r\n      },\r\n      {\r\n         \"id\": \"A\"\r\n      },\r\n      {\r\n         \"id\": \"A\"\r\n      },\r\n      {\r\n         \"id\": \"B\"\r\n         \r\n      },\r\n      {\r\n         \"id\": \"C\"\r\n        \r\n      },\r\n      {\r\n         \"id\": \"D\"\r\n         \r\n      }\r\n   ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:64834/api/cart/CheckOut",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "64834",
+					"path": [
+						"api",
+						"cart",
+						"CheckOut"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckoutPromoBCD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"OrderID\": 1,\r\n   \"Products\": [\r\n      {\r\n         \"id\": \"A\"\r\n      },\r\n      {\r\n         \"id\": \"B\"\r\n      },      \r\n      {\r\n         \"id\": \"B\"\r\n         \r\n      },\r\n      {\r\n         \"id\": \"C\"\r\n        \r\n      },\r\n      {\r\n         \"id\": \"D\"\r\n         \r\n      }\r\n   ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:64834/api/cart/CheckOut",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "64834",
+					"path": [
+						"api",
+						"cart",
+						"CheckOut"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
